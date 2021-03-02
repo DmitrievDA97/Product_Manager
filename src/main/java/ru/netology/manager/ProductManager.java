@@ -1,10 +1,10 @@
-package ru.netology.domain.manager;
+package ru.netology.manager;
 
 
 import ru.netology.domain.Book;
 import ru.netology.domain.Phone;
 import ru.netology.domain.Product;
-import ru.netology.domain.repository.ProductRepository;
+import ru.netology.repository.ProductRepository;
 
 public class ProductManager {
     private ProductRepository repository;

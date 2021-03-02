@@ -1,11 +1,11 @@
-package ru.netology.domain.manager;
+package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Phone;
 import ru.netology.domain.Product;
-import ru.netology.domain.repository.ProductRepository;
+import ru.netology.repository.ProductRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,4 +52,24 @@ class ProductManagerTest {
         Product[] expected = new Product[]{secondPhone};
         assertArrayEquals(expected, actual);
     }
+    @Test
+    void findAllEmpty() {
+        repository.removeById(1);
+        repository.removeById(2);
+        repository.removeById(3);
+        repository.removeById(4);
+        Product[] actual = repository.findAll();
+        Product[] expected = new Product[0];
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    void findAllWithOneElement() {
+        repository.removeById(1);
+        repository.removeById(2);
+        repository.removeById(3);
+        Product[] actual = repository.findAll();
+        Product[] expected = new Product[]{secondPhone};
+        assertArrayEquals(expected, actual);
+    }
+
 }
