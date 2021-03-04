@@ -16,6 +16,7 @@ class ProductManagerTest {
     private Book secondBook = new Book(2, "Book2", 700, "Author2");
     private Phone firstPhone = new Phone(3, "Mi9", 30000, "Xiaomi");
     private Phone secondPhone = new Phone(4, "IphoneX", 60000, "Apple");
+    private Phone thirdPhone = new Phone(5, "Iphone7", 20000, "Apple");
 
     @BeforeEach
     public void setup() {
@@ -53,22 +54,20 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
     @Test
-    void findAllEmpty() {
+    void returnEmptySet() {
         repository.removeById(1);
         repository.removeById(2);
         repository.removeById(3);
         repository.removeById(4);
-        Product[] actual = repository.findAll();
+        Product[] actual = manager.searchBy("Apple");
         Product[] expected = new Product[0];
         assertArrayEquals(expected, actual);
     }
     @Test
-    void findAllWithOneElement() {
-        repository.removeById(1);
-        repository.removeById(2);
-        repository.removeById(3);
-        Product[] actual = repository.findAll();
-        Product[] expected = new Product[]{secondPhone};
+    void returnSetWithSomeElements() {
+        repository.save(thirdPhone);
+        Product[] actual = manager.searchBy("Apple");
+        Product[] expected = new Product[]{secondPhone,thirdPhone};
         assertArrayEquals(expected, actual);
     }
 
